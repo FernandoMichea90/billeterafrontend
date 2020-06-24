@@ -1,25 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React,{Fragment,useContext} from 'react'
+import {BrowserRouter as Router,Route,Switch} from 'react-router-dom'
+import Intranet from '../src/Paginas/Intranet'
+import {CRMContext,CRMProvider} from '../src/context/CRMContext'
 
+import Login from '../src/Paginas/Login'
 function App() {
+  const [auth,guardarAuth]=useContext(CRMContext);
+  console.log(process.env.REACT_APP_BACKEND_URL);
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+   
+  <Router>
+    <Fragment>
+      <CRMProvider value={[auth,guardarAuth]}>
+
+        <Switch>
+
+
+        <Route exac path="/resumeningresos"  component ={Intranet}></Route>
+
+          <Route exac path="/"  component ={Login}></Route>
+
+
+
+
+
+        </Switch>
+        </CRMProvider>
+
+  </Fragment>
+
+
+
+</Router>
+
+
   );
 }
 

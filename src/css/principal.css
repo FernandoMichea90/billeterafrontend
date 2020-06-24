@@ -1,0 +1,17 @@
+.botonChange ,.botonChange:hover,.botonChange:focus,.botonChange:active
+{
+    width: 100%;
+    font-family:'Comic Neue', cursive; 
+    font-weight: 700;
+    background: rgba(234,95,134,1);
+    color: white!important;
+}
+
+.botonChangedos ,.botonChangedos:hover,.botonChangedos:focus,.botonChangedos:active
+{
+    width: 100%;
+    font-family:'Comic Neue', cursive; 
+    font-weight: 700;
+    color: white!important;
+
+}

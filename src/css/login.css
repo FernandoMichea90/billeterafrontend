@@ -1,0 +1,112 @@
+ @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@300;700&display=swap');
+body
+{
+    font-family: 'Comic Neue', cursive;
+
+}
+
+
+
+
+.fondoLeft
+{
+    background-image: url('../imagenes/login.png');
+    height: 100vh;
+    width: 50%;
+    float: left;
+    background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; 
+}
+.fondoRight
+{
+    height: 100vh;
+    width: 50%;
+    float: left;
+}
+
+.divLogin
+{
+    padding-left: 10vw;
+    padding-top: 13vh;
+
+}
+.margenInput
+{
+    margin-top:20px
+}
+.largoInput
+{
+    width: 33vw!important;
+
+}
+.pTitulo
+{
+    font-weight: 700;
+    color: #133273;
+    font-size: 37px;
+}
+
+.botonIngresar,.botonIngresar:hover{
+    
+    margin-right: 5px;
+    border-radius: 25px;
+    padding: .2rem 6rem .2rem 6rem;
+    background-color: #1F7CFF;
+    font-family:'Comic Neue', cursive; 
+    font-weight: 700;
+}
+.botonCrearCuenta ,.botonCrearCuenta:hover
+{
+    margin-right: 5px;
+    border-radius: 25px;
+    padding: .2rem 6rem .2rem 6rem;
+    background-color: white;
+    font-family:'Comic Neue', cursive; 
+    font-weight: 700;
+    color: #4B5D72;
+    margin-top: 20px;
+    position: absolute;
+    top: 0;
+    right: 7px;
+}
+
+
+
+.texto
+{
+    font-family: 'Comic Neue', cursive;
+}
+
+@media only screen and (max-width: 992px)
+{
+
+    .fondoLeft
+{
+  display: none;
+}
+
+.fondoRight
+{
+    width: 100%;
+    float: none;
+    height: 100vw;
+}
+
+.botonCrearCuenta ,.botonCrearCuenta:hover
+{
+    margin-right: 5px;
+    margin-top: 20px!important;
+    border-radius: 25px;
+    padding: .2rem 6rem .2rem 6rem;
+    background-color: white;
+    font-family:'Comic Neue', cursive; 
+    font-weight: 700;
+    color: #4B5D72;
+    margin-top: 20px;
+    position: relative;
+   
+    
+}
+
+}
