@@ -176,7 +176,7 @@ const agregarIngresos=e=>{
                                 name:"fecha",
                                 value:moment(newDate).format('LL')
 
-     
+      
                             }     
 
                          })   
@@ -234,6 +234,8 @@ const agregarIngresos=e=>{
 
                         ))}
                 </Select>
+             
+             
                 </div>
                 
                 <div className="col s12">

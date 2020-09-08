@@ -4,7 +4,13 @@ import {Bar} from 'react-chartjs-2';
 
 function GraficoDos(props){
 
-  console.log(props.graficDos);
+  
+  var {opcion}=props
+  console.log("el prop");
+  console.log(opcion);
+  
+  
+
   
 
 const state=props.graficDos;
@@ -33,7 +39,7 @@ const state = {
           options={{
             title:{
               display:true,
-              text:'Ingreso Mensual',
+              text:opcion,
               fontSize:20
             },
             legend:{

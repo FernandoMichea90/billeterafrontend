@@ -12,13 +12,42 @@ import {Button, Icon} from 'react-materialize'
 import { Link } from 'react-router-dom';
 
 
-function Principaltres(){
+function Principaltres(props){
 
+
+
+
+    const token=localStorage.getItem('token')   
+
+    if(token!==undefined){
+
+
+       var decoded = jwt_decode(token);              
+     }
+ 
+     const {id}=decoded
+     //Periodo
+     const [statePeriodo,guardarPeriodo]=useState(
+        {
+            id:'',inicio:'',fin:''
+        })
+     var periodo =""
+
+        try {periodo=props.location.state.periodo} catch (error) {}
+
+        statePeriodo.id=id;
+                    statePeriodo.inicio=periodo.inicio;
+                    statePeriodo.fin=periodo.fin;
+        
+
+        //------------------
     var day;
     const [ingreso,ResumenIngreso]=useState({
 
         total:''
     })
+
+  
     const [ingresomes,Enviaringresomes]=useState({})
     const [gastomes,Enviargastomes]=useState({})
     const [prueba,enviarprueba]=useState({
@@ -98,16 +127,27 @@ function Principaltres(){
 
     useEffect(() => {
 
+
+    guardarPeriodo(statePeriodo)  
+
     const obtenervariable =async()=>{
-        console.log("paso por el useEffect");
         
         //Primer Div 
         const ingresoresumen= await clienteAxios.get('/ingresostotales')
-        console.log(ingresoresumen);
         
         const gastosresumen= await clienteAxios.get('/gastostotales')
-         var totalAmount=ingresoresumen.data[0].totalAmount-gastosresumen.data[0].totalAmount;
-        ingreso.total=totalAmount
+         
+        if(ingresoresumen.data<1)
+        {
+            ingreso.total=0
+        }else
+        {
+
+            var totalAmount=ingresoresumen.data[0].totalAmount-gastosresumen.data[0].totalAmount;
+            ingreso.total=totalAmount
+            
+        }
+       
          ResumenIngreso(ingreso) 
 
          
@@ -128,7 +168,7 @@ function Principaltres(){
         //Tercer Div 
 
        
-        const gastopormes= await clienteAxios.get('/gastostotalesmes')
+        const gastopormes= await clienteAxios.get(`/gastostotalesmes/${id}`)
         var gastomes=gastopormes.data
         for(var i=0;i<gastomes.length;i++)
         {
@@ -141,7 +181,22 @@ function Principaltres(){
 
 
         //Gragico Uno 
-        const graficouno= await clienteAxios.get('/gastosportipo')
+
+        var graficouno
+        if(periodo==""){
+
+           console.log( "Periodo vacio ");
+           
+        graficouno= await clienteAxios.get(`/gastosportipoprueba/${id}`)
+        }else
+        {
+            console.log( "Periodo lleno");
+            
+            //Peridoo lleno
+        graficouno= await clienteAxios.put(`/gastosportipoperiodo`,statePeriodo)
+        }
+
+        
         console.log(graficouno.data);
         
         var lista=graficouno.data
@@ -150,7 +205,7 @@ function Principaltres(){
 
         for(var i=0;i<lista.length;i++)
         {
-            dataset.push(lista[i].quantity)
+            dataset.push(lista[i].totalAmount)
             const consulta=await clienteAxios.get(`/tipodegastosedit/${lista[i]._id}`);   
             const {tipo}=consulta.data 
             label.push(tipo)
@@ -208,38 +263,53 @@ function Principaltres(){
         // Grafico tres 
 
 
-         const token=localStorage.getItem('token')   
+         
+          var ingresosdata=""
+          if(periodo==""){
+         ingresosdata= await clienteAxios.get(`/gastospordia/${id}`)
+          }else
+          {
+              
+             ingresosdata= await clienteAxios.put(`/gastospordia`,statePeriodo)
 
-         if(token!==undefined){
-
-     
-            var decoded = jwt_decode(token);              
           }
-      
-          const {id}=decoded
-
-        const  ingresosdata= await clienteAxios.get(`/gasto/${id}`)
-
          var datasetgrafTres=[];
          var labelgrafTres=[]
  
          var ingresos=ingresosdata.data
+
+         console.log("tamaño"+ingresos.length);
+         for(var i=ingresos.length-1;i>=0;i--)
+         {  
+
+
+            var {_id,totaldia}=ingresos[i];
+            labelgrafTres.push(moment(_id).format('LL'))
+            datasetgrafTres.push(totaldia)
+            
+           
+            
+         }
+
+         /*
          for(var i=0;i<ingresos.length;i++)
          {  
 
-            var {fecha,monto}=ingresos[i];
-            console.log(fecha +monto);
-            labelgrafTres.push(moment(fecha).format('LL'))
-            datasetgrafTres.push(monto)
+
+            var {_id,totaldia}=ingresos[i];
+            labelgrafTres.push(moment(_id).format('LL'))
+            datasetgrafTres.push(totaldia)
+            
+           
             
          }
- 
+            */
  
          enviarGraftres({
              datasets: [{
-                                 label: 'Ingreso',
-                     backgroundColor: 'rgba(75,192,192,1)',
-                     borderColor: 'rgba(75,192,192,1)',
+                    label: 'Gasto',
+                     backgroundColor: 'rgba(255,0,0,1)',
+                     borderColor: 'rgba(255,0,0,1)',
                      fill: false,
                      lineTension: 0.5,
                      
@@ -302,14 +372,14 @@ function Principaltres(){
 
                         <div className="col s6">
 
-                            <GraficoDos graficDos={graficDos}>
+                            <GraficoDos graficDos={graficDos} opcion="Gasto  Mensual">
 
                             </GraficoDos>
 
 
                         </div>
                         <div className="col s12">
-                          <GraficoTres graficTres={graficTres}>
+                          <GraficoTres graficTres={graficTres} title="Gastos Diario">
 
                           </GraficoTres>
                         </div>

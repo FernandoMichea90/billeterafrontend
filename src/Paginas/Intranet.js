@@ -20,8 +20,9 @@ import EditarGasto from '../componentes/gastos/EditarGastos'
 
 import Home from '../componentes/Principal'
 import HomeGastos from '../componentes/Principalgastos'
+import Calendario from '../componentes/calendario/calendario'
 
-
+import '../css/body.css'
 
 function Intranet()
 {
@@ -59,7 +60,9 @@ return(
                     <Route exac path="/tipogastos"  component ={Tipogastos}></Route>
 
                     <Route exac path="/resumengastos"  component ={HomeGastos}></Route>
-                    <Route exac path="/"  component ={Home}></Route>
+                    <Route exac path="/calendario"  component ={Calendario}></Route>
+
+                  <Route exac path="/"  component ={Home}></Route>
 
                     </Switch>
                      </CRMProvider>

@@ -5,8 +5,20 @@ import {Line} from 'react-chartjs-2';
 function GraficoTres(props)
 {
 
+    var descripcion="";
     const state =props.graficTres 
-     
+    var title=props.title
+
+    if(title=="Gastos Diario")
+    {
+        descripcion="Gastos"
+
+    }
+    else
+    {
+      title="Ingresos Diario"
+      descripcion="Ingresos"
+    }
     return(
         <div>
         <Line
@@ -14,7 +26,7 @@ function GraficoTres(props)
           options={{
             title:{
               display:true,
-              text:'Ingresos Diario',
+              text:title,
               fontSize:20
             },
             legend:{

@@ -40,8 +40,11 @@ function  sidebar()
     </ul>
     <ul>
         <li>
-        <img className="logoImg"  alt="" src={calendario} ></img>  
+         <Link to="/calendario">   
+        <img className="logoImg"  alt="" src={calendario} ></img>
+        </Link>  
         </li>
+       
     </ul>
     <ul>
         <li>

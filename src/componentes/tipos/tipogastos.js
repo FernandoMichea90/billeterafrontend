@@ -70,7 +70,6 @@ const agregarTipogastos=e=>{
                                 usuario:decoded.id,    
                                 tipo:'' 
                             })
-                    props.history.push('/intranet')
                   
 
 

@@ -88,7 +88,7 @@ const agregarIngresos=e=>{
                 }   
                 else {
                     Swal.fire(
-                        'Se agregó el Cliente',
+                        'Se agregó gasto',
                         res.data.mensaje,
                         'success'
 
@@ -165,8 +165,9 @@ const agregarIngresos=e=>{
         'Dec'
       ]}}}
                 label="fecha"
-                value={ingreso.fecha}
                 id="DatePicker-5"
+                value={ingreso.fecha}
+              
                 onChange={(newDate)=>
                     {
                      actualizarState(

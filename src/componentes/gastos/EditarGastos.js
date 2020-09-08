@@ -24,9 +24,11 @@ useEffect(()=>{
         const consulta=await clienteAxios.get(`/gastoedit/${id}`);
         
         var {usuario,fecha,tipo}=consulta.data
+        console.log(consulta.data);
+        
         consulta.data.tipo=tipo
         consulta.data.fecha=moment(fecha).format('LL')
-        const diariosConsulta= await clienteAxios.get(`/tipodegasto/${usuario}`);
+        const diariosConsulta= await clienteAxios.get(`/tipodegastos/${usuario}`);
         guardarlista(diariosConsulta.data);
         GuardarIngreso(consulta.data);
     }    
@@ -70,7 +72,8 @@ useEffect(()=>{
                 }
     
                 // redireccionar
-                props.history.push('/ingreso');
+
+                props.history.push('/gasto')
             })
 
     }
@@ -84,7 +87,7 @@ useEffect(()=>{
             <div className="row"> 
                 <div className="col s12">
                     <h1>
-                        Editar Ingresos
+                        Editar Gasto
                     </h1>
 
                 </div>

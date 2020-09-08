@@ -56,7 +56,7 @@ const actualizarRegistro = e => {
             }
 
             // redireccionar
-            props.history.push('/intranet');
+            props.history.push('/tipogastos');
         })
 }
     
